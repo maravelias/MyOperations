@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: myops_postgres_container
+    restart: always
+    environment:
+      POSTGRES_USER: myoperationsuser
+      POSTGRES_PASSWORD: myoperationspassword
+      POSTGRES_DB: myops
+    ports:
+      - "5432:5432"
+    volumes:
+      - myops_postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:9.2.0
+    container_name: pgadmin_container
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@domain.com
+      PGADMIN_DEFAULT_PASSWORD: adminpassword
+    ports:
+      - "8081:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+      - ./pgadmin_setup/servers.json:/pgadmin4/servers.json
+
+
+
+volumes:
+  myops_postgres_data:
+    driver: local
+  pgadmin_data:
+    driver: local
