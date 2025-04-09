@@ -1,8 +1,17 @@
 version: '3.8'
 
 services:
+  prometheus:
+    image: prom/prometheus:v2.53.4
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus_setup/prometheus.yml:/etc/prometheus/prometheus.yml
+    restart: always
+
   postgres:
-    image: postgres:latest
+    image: postgres:17.4
     container_name: myops_postgres_container
     restart: always
     environment:
