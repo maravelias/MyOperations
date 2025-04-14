@@ -37,13 +37,29 @@ services:
       - ./pgadmin_setup/servers.json:/pgadmin4/servers.json
 
   loki:
-    image: grafana/loki
+    image: grafana/loki:3.4.3
     container_name: loki
     command: -config.file=/etc/loki/loki.yaml
     volumes:
       - ./loki_setup/loki.yaml:/etc/loki/loki.yaml
     ports:
       - 3100:3100
+    restart: always
+
+  grafana:
+    image: grafana/grafana:11.6.0
+    container_name: grafana
+    depends_on:
+      - loki
+      - prometheus
+    ports:
+      - 3000:3000
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: 123qwe
+      GF_SERVER_HTTP_ADDR: 0.0.0.0
+      GF_USERS_DEFAULT_THEME: system
+    volumes:
+      - ./grafana_setup/datasources:/etc/grafana/provisioning/datasources
     restart: always
 
 volumes:
