@@ -36,7 +36,15 @@ services:
       - pgadmin_data:/var/lib/pgadmin
       - ./pgadmin_setup/servers.json:/pgadmin4/servers.json
 
-
+  loki:
+    image: grafana/loki
+    container_name: loki
+    command: -config.file=/etc/loki/loki.yaml
+    volumes:
+      - ./loki_setup/loki.yaml:/etc/loki/loki.yaml
+    ports:
+      - 3100:3100
+    restart: always
 
 volumes:
   myops_postgres_data:

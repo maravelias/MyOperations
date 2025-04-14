@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~    /*
+  ~     * Licensed under the Apache License, Version 2.0 (the "License");
+  ~     * you may not use this file except in compliance with the License.
+  ~     * You may obtain a copy of the License at
+  ~     *
+  ~     *      http://www.apache.org/licenses/LICENSE-2.0
+  ~     *
+  ~     * Unless required by applicable law or agreed to in writing, software
+  ~     * distributed under the License is distributed on an "AS IS" BASIS,
+  ~     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~     * See the License for the specific language governing permissions and
+  ~     * limitations under the License.
+  ~     */
+  ~
+  -->
+
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+	<include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+	<springProperty scope="context" name="log.appName" source="log.appName" defaultValue="MyOperations"/>
+
+	<appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
+		<batchMaxBytes>65536</batchMaxBytes>
+		<http>
+			<url>http://${log.hostname:-127.0.0.1}:${log.port:-3100}/loki/api/v1/push</url>
+			<requestTimeoutMs>15000</requestTimeoutMs>
+		</http>
+		<format>
+			<label>
+				<pattern>
+					app=${log.appName},host=${HOSTNAME},level=%level
+				</pattern>
+			</label>
+			<message>
+				<pattern>%-5level %logger{36} - %msg%n</pattern>
+			</message>
+			<sortByTime>true</sortByTime>
+		</format>
+	</appender>
+
+	<root level="INFO">
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="LOKI"/>
+	</root>
+
+	<logger name="org.springframework.web" level="WARN"/>
+</configuration>
