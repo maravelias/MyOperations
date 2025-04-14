@@ -30,4 +30,5 @@ import io.jmix.flowui.view.ViewDescriptor;
 @ViewDescriptor(path = "customer-detail-view.xml")
 @EditedEntityContainer("customerDc")
 public class CustomerDetailView extends StandardDetailView<Customer> {
+
 }
