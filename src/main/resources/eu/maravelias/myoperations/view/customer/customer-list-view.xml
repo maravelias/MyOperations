@@ -49,12 +49,12 @@
 				<action id="removeAction" type="list_remove"/>
 			</actions>
 			<columns resizable="true">
-				<column property="zip"/>
-				<column property="address"/>
-				<column property="vat"/>
-				<column property="city"/>
 				<column property="companyName"/>
 				<column property="email"/>
+				<column property="vat"/>
+				<column property="city"/>
+				<column property="zip"/>
+				<column property="address"/>
 				<column property="active"/>
 			</columns>
 		</dataGrid>
