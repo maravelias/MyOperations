@@ -7,21 +7,25 @@ on:
       - master  # Trigger the workflow on pushes to the 'main' branch. Change this if your default branch is different.
 
 jobs:
-  deploy:
+  checkout:
     runs-on: ubuntu-latest
-
     steps:
-      # Step 1: Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Set up Python (required for MkDocs)
+  setup-python:
+    runs-on: ubuntu-latest
+    needs: checkout
+    steps:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'  # Use the latest Python 3 version
 
-      # Step 3: Install MkDocs and dependencies
+  install-dependencies:
+    runs-on: ubuntu-latest
+    needs: setup-python
+    steps:
       - name: Install MkDocs and dependencies
         run: |
           python -m pip install --upgrade pip
@@ -29,13 +33,20 @@ jobs:
           pip install mkdocs-material  # Required if you're using the Material theme
           pip install mkdocs-git-revision-date-localized-plugin  # Example for any custom plugins (optional)
 
-      # Step 4: Build MkDocs site
+  build:
+    runs-on: ubuntu-latest
+    needs: install-dependencies
+    steps:
       - name: Build the documentation
         run: mkdocs build
 
-      # Step 5: Deploy to GitHub Pages
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}    # GitHub token provided by Actions
           publish_dir: ./site                          # The directory containing the built files
+                      # The directory containing the built files
