@@ -1,62 +1,73 @@
 # MyOperations Documentation
 
 ## Project Summary
-**MyOperations** is a web-based application designed for managing operations. Its primary focus is on handling customer-related operations, including managing **customers**, their **contacts**, and **users** within the system.
 
-The project integrates role-based access control to ensure users have appropriate permissions. User authentication and localization are included, with multi-language support and default credentials functionality. The system defines a detailed UI for managing entities, which includes forms and lists for entities like Customers, Contacts, and Users, adhering to best practices for modularity and maintainability.
+**MyOperations** is a web-based application designed to manage operations effectively. Its primary focus includes handling **customers**, their **contacts**, and **users** within the system.
 
-The application uses **Vaadin Flow** for creating responsive web UI and incorporates Spring Security for secure user authentication and authorization. It leverages **Jmix**, which is an extension of Spring Boot, for rapid development, rich data management, and business logic.
+Key features of the application:
+- **Role-Based Access Control (RBAC)** to ensure users have appropriate permissions.
+- **User Authentication and Localization** with multi-language support and default credentials functionality.
+- Detailed UI for managing entities such as Customers, Contacts, and Users.
+- Adherence to best practices for modularity and maintainability.
+
+The project uses **Vaadin Flow** to create responsive web UIs and incorporates **Spring Security** for secure user authentication and authorization. It leverages **Jmix** (an extension of Spring Boot) for rapid development, rich data management, and business logic.
+
+---
 
 ## Technology Stack
-1. **Backend Frameworks and Libraries:**
-   - **Spring Boot**: Provides core application development features and dependency injection.
-   - **Jmix**: Supports business logic, entity management, and UI design for enterprise applications.
-   - **Spring Security**: Ensures authentication, authorization, and security configuration.
-   - **HikariCP**: Database connection pool provider (through `main.datasource` configuration).
 
-2. **Frontend:**
-   - **Vaadin Flow**: A Java-based framework for building modern web user interfaces, focusing on server-side development.
-   - **Vaadin's Lumo Theme**: A customizable design theme to enrich the UI.
-   - **PWA (Progressive Web Application)**: Used for improving the app's mobile usability and offline capabilities.
+### 1. Backend Frameworks and Libraries
+- **Spring Boot**: Provides core application development features and dependency injection.
+- **Jmix**: Facilitates business logic, entity management, and UI design for enterprise applications.
+- **Spring Security**: Ensures robust authentication and authorization.
+- **HikariCP**: Provides database connection pool management.
 
-3. **Utilities:**
-   - **SLF4J (Simple Logging Facade for Java)** and **Logback** (via LoggerFactory): For logging and debugging purposes.
-   - **Jakarta Persistence API**: Entity management for performing database operations.
-   - **Apache Commons Lang**: For string utilities and other helper methods.
+### 2. Frontend Frameworks and Tools
+- **Vaadin Flow**: Java-based framework for modern web UIs with a focus on server-side development.
+- **Vaadin's Lumo Theme**: A customizable design theme for a rich user interface.
+- **Progressive Web Application (PWA)**: Enhances mobile usability with offline capabilities.
 
-4. **Database:**
-   - **JDBC** with **HikariCP**: Used for connecting to and executing database operations.
+### 3. Utilities
+- **SLF4J** and **Logback**: Used for logging and debugging in the application.
+- **Jakarta Persistence API**: Manages entities for performing database operations.
+- **Apache Commons Lang**: Provides utility methods, especially for working with Strings.
 
-5. **Security Frameworks:**
-   - **Spring Security**: For managing authentication and roles within the application.
-   - **Custom Role Policies**: Defined using resource-based role policies in the Jmix framework.
+### 4. Database
+- **JDBC** with **HikariCP**: Used for connecting to and executing operations on databases.
 
-6. **Build and Configuration:**
-   - **Maven**: Build automation tool for managing dependencies and build lifecycle.
-   - **Application Configuration** via Spring Boot properties (e.g., `application.properties`).
+### 5. Security Frameworks
+- **Spring Security**: Enhances application security with robust role- and permission-based controls.
+- **Custom Role Policies**: Resource-based role policies defined in the Jmix framework.
 
-7. **Localization:**
-   - **Multi-locale Support**: The application dynamically adjusts the locale settings for the UI based on user selection or session settings.
+### 6. Build and Configuration
+- **Maven**: A build automation tool for dependency management and project build lifecycle.
+- **Application Configuration**: Managed via Spring Boot properties (e.g., `application.properties`).
 
-## Notable Features of the Application
-- **Entity Management**:
-  - Customers and their contacts are managed through dedicated views.
-  - Users are managed with password encoding and role assignments.
+### 7. Localization
+- **Multi-locale Support**: Dynamically adjusts locale settings based on user preferences or session settings.
 
-- **Access Control**:
-  - Security roles such as `FullAccessRole` and `UiMinimalRole` are defined, providing granular access management for system resources.
+---
 
-- **Multi-Language Support**:
-  - Interfaces and error messages are localized using `LocaleChangeObserver` and custom translations.
+## Notable Features
 
-- **Modular Development**:
-  - Separate `@ViewController` and `@ViewDescriptor` annotations for views ensure modularity and decoupling of the UI layer from the backend.
+### 1. Entity Management
+- Dedicated views for managing customers and their contacts.
+- User management includes password encoding and role assignments.
 
-- **Customization**:
-  - Custom `SecurityFilterChain` for public API endpoints (e.g., `/actuator/**`).
+### 2. Access Control
+- Security roles such as `FullAccessRole` and `UiMinimalRole` are defined, enabling fine-grained access control.
+
+### 3. Multi-Language Support
+- Interfaces and error messages are localized using the `LocaleChangeObserver` and custom translations.
+
+### 4. Modular Development
+- Separation of concerns with `@ViewController` and `@ViewDescriptor` annotations for views, ensuring a decoupled UI layer.
+
+### 5. Customization
+- Custom `SecurityFilterChain` configurations for public API endpoints (e.g., `/actuator/**`).
 
 ---
 
 ## License
 
-This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the **Apache License 2.0**. See the [LICENSE](LICENSE) file for further details.
