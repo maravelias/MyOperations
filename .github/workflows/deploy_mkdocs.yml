@@ -1,6 +1,7 @@
 name: Deploy MkDocs to GitHub Pages
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master  # Trigger the workflow on pushes to the 'main' branch. Change this if your default branch is different.
