@@ -32,7 +32,7 @@ jobs:
           pip install mkdocs
           pip install mkdocs-material  # Required if you're using the Material theme
           pip install mkdocs-git-revision-date-localized-plugin  # Example for any custom plugins (optional)
-          steps:
+
       - name: Build the documentation
         run: mkdocs build
 
